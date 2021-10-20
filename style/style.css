@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+/* header */ 
 header .menuBar{
     width: 100%;
     height: 6vh;
@@ -24,6 +25,23 @@ header .menuBar ul a{
     text-decoration: none;
     text-transform: uppercase;
     color: #000;
+}
+
+/* content */
+.content{
+    color: #000;
+    margin: 10px;
+}
+.content table{
+    width: 100%;
+}
+.content table thead{
+    height: 4vh;
+}
+tr, th{
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    text-align: center;
 }
 
 /* short styles */

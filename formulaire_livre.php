@@ -7,6 +7,29 @@
 </head>
 <body>
     <?php
+        function connectDb(){
+            $host = 'localhost'; // ou sql.hebergeur.com
+            $user = 'root';      // ou login
+            $pwd = '';      // ou xxxxxx
+            $db = 'bibliotheque';
+    
+            try {
+                $bdd = new PDO('mysql:host='.$host.';dbname='.$db.';charset=utf8', $user, $pwd, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                return $bdd;
+            }
+            catch (Exception $e)
+            {
+                exit('Erreur : '.$e->getMessage());
+            }
+        }
+    
+        $bdd = connectDb(); //connexion à la BDD
+        $query = $bdd->prepare('SELECT * FROM livre'); // requête SQL
+        $query->execute(); // paramètres et exécution
+
+        $result = $query->fetchAll();
+        $query->closeCursor();
+
         echo'
         <header>
             <div class="menuBar">
