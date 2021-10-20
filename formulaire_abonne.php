@@ -11,9 +11,9 @@
         <header>
             <div class="menuBar">
                 <ul>
-                    <li>Abonné</li>
-                    <li>Livre</li>
-                    <li>Emprunt</li>
+                    <a href="formulaire_abonne.php"><li class="fwbl">Abonné</li></a>
+                    <a href="formulaire_livre.php"><li>Livre</li></a>
+                    <a href="formulaire_emprunt.php"><li>Emprunt</li></a>
                 </ul>
             </div>
         </header>
