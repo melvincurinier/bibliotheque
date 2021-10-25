@@ -64,6 +64,12 @@
                 echo '
                 </tbody>
             </table>
+
+            <form method="post" action="">
+                <label for="prenom">Prénom</label><br>
+                <input type="text" id="prenom" name="prenom"><br><br>
+                <input type="submit" value="Ajouter">
+            </form>
         </div>
         ';
     ?>

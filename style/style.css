@@ -30,7 +30,7 @@ header .menuBar ul a{
 /* content */
 .content{
     color: #000;
-    margin: 10px;
+    margin: 40px;
 }
 .content table{
     width: 100%;
@@ -40,8 +40,13 @@ header .menuBar ul a{
 }
 tr, th{
     border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
     text-align: center;
+}
+.content form{
+    margin-top: 10px;
+}
+#prenom{
+    width: 100%;
 }
 
 /* short styles */
