@@ -63,8 +63,15 @@
                 };
                 echo '
                 </tbody>
-            </table>
-
+            </table>';
+            if($_POST){
+                $requete = "INSERT INTO abonne (prenom) VALUES ('$_POST[prenom]')";
+                $query = $bdd->prepare($requete);
+                $query->execute();
+                $query->closeCursor();
+                echo'Le prénom '.$_POST['prenom'].' a bien été ajouté !';
+            }
+            echo'
             <form method="post" action="">
                 <label for="prenom">Prénom</label><br>
                 <input type="text" id="prenom" name="prenom"><br><br>
