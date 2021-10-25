@@ -24,11 +24,6 @@
         }
     
         $bdd = connectDb(); //connexion à la BDD
-        $query = $bdd->prepare('SELECT * FROM emprunt'); // requête SQL
-        $query->execute(); // paramètres et exécution
-
-        $result = $query->fetchAll();
-        $query->closeCursor();
 
         echo'
         <header>
@@ -40,6 +35,83 @@
                 </ul>
             </div>
         </header>
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>id_emprunt</th>
+                        <th>id_livre</th>
+                        <th>id_abonne</th>
+                        <th>date_sortie</th>
+                        <th>date_sortie</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>';
+                $query = $bdd->prepare('SELECT * FROM emprunt'); // requête SQL
+                $query->execute(); // paramètres et exécution
+                $result = $query->fetchAll();
+                $query->closeCursor();
+
+                foreach ($result as $emprunt){
+                    echo '
+                    <tr>
+                        <th>'.$emprunt['id_emprunt'].'</th>
+                        <th>'.$emprunt['id_livre'].'</th>
+                        <th>'.$emprunt['id_abonne'].'</th>
+                        <th>'.$emprunt['date_sortie'].'</th>
+                        <th>'.$emprunt['date_rendu'].'</th>
+                        <th>&#x1F58A;</th>
+                        <th>&#10060;</th>
+                    <tr>
+                    ';
+                };
+                echo '
+                </tbody>
+            </table>';
+            if($_POST){
+                $requete = "INSERT INTO emprunt (id_livre, id_abonne, date_sortie, date_rendu) VALUES ($_POST[id_livre], '$_POST[id_abonne]', '$_POST[date_sortie]', '$_POST[date_rendu]')";
+                $query = $bdd->prepare($requete);
+                $query->execute();
+                $query->closeCursor();
+                echo'L\'emprunt a bien été ajouté !';
+            }
+            echo'
+            <form method="post" action="">
+                <label for="id_abonne">Abonné</label><br>
+                <select id="id_abonne" name="id_abonne">';
+                    $query = $bdd->prepare('SELECT * FROM abonne'); // requête SQL
+                    $query->execute(); // paramètres et exécution
+                    $result = $query->fetchAll();
+                    $query->closeCursor();
+                    foreach($result as $abonne){
+                        echo'
+                        <option value="'.$abonne['id_abonne'].'">'.$abonne['id_abonne'].' - '.$abonne['prenom'].'</option>
+                        ';
+                    }
+                echo'
+                </select><br>
+                <label for="id_livre">Livre</label><br>
+                <select id="id_livre" name="id_livre">';
+                    $query = $bdd->prepare('SELECT * FROM livre'); // requête SQL
+                    $query->execute(); // paramètres et exécution
+                    $result = $query->fetchAll();
+                    $query->closeCursor();
+                    foreach($result as $livre){
+                        echo'
+                        <option value="'.$livre['id_livre'].'">'.$livre['id_livre'].' - '.$livre['auteur'].' | '.$livre['titre'].'</option>
+                        ';
+                    }
+                echo'
+                </select><br>
+                <label for="date_sortie">Date Sortie</label><br>
+                <input type="date" id="date_sortie" name="date_sortie"><br>
+                <label for="date_rendu">Date Rendu</label><br>
+                <input type="date" id="date_rendu" name="date_rendu"><br><br>
+                <input type="submit" value="Ajouter">
+            </form>
+        </div>
         ';
     ?>
 </body>
