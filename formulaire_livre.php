@@ -40,6 +40,48 @@
                 </ul>
             </div>
         </header>
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id_livre</th>
+                        <th>Auteur</th>
+                        <th>Titre</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>';
+                foreach ($result as $livre){
+                    echo '
+                    <tr>
+                        <th>'.$livre['id_livre'].'</th>
+                        <th>'.$livre['auteur'].'</th>
+                        <th>'.$livre['titre'].'</th>
+                        <th>&#x1F58A;</th>
+                        <th>&#10060;</th>
+                    <tr>
+                    ';
+                };
+                echo '
+                </tbody>
+            </table>';
+            if($_POST){
+                $requete = "INSERT INTO livre (auteur, titre) VALUES ('$_POST[auteur]', '$_POST[titre]')";
+                $query = $bdd->prepare($requete);
+                $query->execute();
+                $query->closeCursor();
+                echo'<p>Le livre '.$_POST['titre'].' a bien été ajouté !</p>';
+            }
+            echo'
+            <form method="post" action="">
+                <label for="auteur">Auteur</label><br>
+                <input type="text" id="auteur" name="auteur"><br><br>
+                <label for="titre">Titre</label><br>
+                <input type="text" id="titre" name="titre"><br><br>
+                <input type="submit" value="Ajouter">
+            </form>
+        </div>
         ';
     ?>
 </body>

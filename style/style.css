@@ -45,7 +45,10 @@ tr, th{
 .content form{
     margin-top: 10px;
 }
-#prenom{
+.content form input{
+    padding: 3px;
+}
+#prenom, #auteur, #titre{
     width: 100%;
 }
 

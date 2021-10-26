@@ -44,7 +44,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Id_abonné</th>
                         <th>Prénom</th>
                         <th>Modifier</th>
                         <th>Supprimer</th>
@@ -69,7 +69,7 @@
                 $query = $bdd->prepare($requete);
                 $query->execute();
                 $query->closeCursor();
-                echo'Le prénom '.$_POST['prenom'].' a bien été ajouté !';
+                echo'<p>Le prénom '.$_POST['prenom'].' a bien été ajouté !</p>';
             }
             echo'
             <form method="post" action="">

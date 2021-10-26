@@ -39,11 +39,11 @@
             <table>
                 <thead>
                     <tr>
-                        <th>id_emprunt</th>
-                        <th>id_livre</th>
-                        <th>id_abonne</th>
-                        <th>date_sortie</th>
-                        <th>date_sortie</th>
+                        <th>Id_emprunt</th>
+                        <th>Id_livre</th>
+                        <th>Id_abonne</th>
+                        <th>Date_sortie</th>
+                        <th>Date_sortie</th>
                         <th>Modifier</th>
                         <th>Supprimer</th>
                     </tr>
@@ -75,7 +75,7 @@
                 $query = $bdd->prepare($requete);
                 $query->execute();
                 $query->closeCursor();
-                echo'L\'emprunt a bien été ajouté !';
+                echo'<p>L\'emprunt a bien été ajouté !</p>';
             }
             echo'
             <form method="post" action="">
@@ -91,7 +91,7 @@
                         ';
                     }
                 echo'
-                </select><br>
+                </select><br><br>
                 <label for="id_livre">Livre</label><br>
                 <select id="id_livre" name="id_livre">';
                     $query = $bdd->prepare('SELECT * FROM livre'); // requête SQL
@@ -104,9 +104,9 @@
                         ';
                     }
                 echo'
-                </select><br>
+                </select><br><br>
                 <label for="date_sortie">Date Sortie</label><br>
-                <input type="date" id="date_sortie" name="date_sortie"><br>
+                <input type="date" id="date_sortie" name="date_sortie"><br><br>
                 <label for="date_rendu">Date Rendu</label><br>
                 <input type="date" id="date_rendu" name="date_rendu"><br><br>
                 <input type="submit" value="Ajouter">
