@@ -71,7 +71,7 @@
                 </tbody>
             </table>';
             if($_POST){
-                $requete = "INSERT INTO emprunt (id_livre, id_abonne, date_sortie, date_rendu) VALUES ($_POST[id_livre], '$_POST[id_abonne]', '$_POST[date_sortie]', '$_POST[date_rendu]')";
+                $requete = "INSERT INTO emprunt (id_livre, id_abonne, date_sortie, date_rendu) VALUES ($_POST[id_livre], $_POST[id_abonne], '$_POST[date_sortie]', '$_POST[date_rendu]')";
                 $query = $bdd->prepare($requete);
                 $query->execute();
                 $query->closeCursor();
