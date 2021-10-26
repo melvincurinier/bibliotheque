@@ -26,7 +26,6 @@
         $bdd = connectDb(); //connexion à la BDD
         $query = $bdd->prepare('SELECT * FROM abonne'); // requête SQL
         $query->execute(); // paramètres et exécution
-
         $result = $query->fetchAll();
         $query->closeCursor();
 
@@ -52,31 +51,60 @@
                 </thead>
                 <tbody>';
                 foreach ($result as $abonne){
-                    echo '
-                    <tr>
-                        <th>'.$abonne['id_abonne'].'</th>
-                        <th>'.$abonne['prenom'].'</th>
-                        <th><a href="?action=modifier">&#x1F58A;</a></th>
-                        <th><a href="?action=supprimer">&#10060;</a></th>
-                    <tr>
+                    echo '                        
+                        <tr>
+                            <th>'.$abonne['id_abonne'].'</th>
+                            <th>'.$abonne['prenom'].'</th>
+                            <th><a href="?action=modifier&id_abonne='.$abonne['id_abonne'].'">&#x1F58A;</a></th>
+                            <th><a href="?action=supprimer&id_abonne='.$abonne['id_abonne'].'">&#10060;</a></th>
+                        <tr>
                     ';
                 };
                 echo '
                 </tbody>
             </table>';
-            if($_POST){
-                $requete = "INSERT INTO abonne (prenom) VALUES ('$_POST[prenom]')";
+
+            if((isset($_GET['id_abonne']))
+            AND isset($_POST['prenom']) && ($_POST['prenom']!=""))
+            {
+                $requete = ("UPDATE abonne set prenom = '$_POST[prenom]' WHERE id_abonne=$_GET[id_abonne]");
                 $query = $bdd->prepare($requete);
                 $query->execute();
                 $query->closeCursor();
-                echo'<p>Le prénom '.$_POST['prenom'].' a bien été ajouté !</p>';
+                echo'<p>L\'abonné '.$_POST['prenom'].' a bien été modifié !</p>';
+            }
+            
+            if(isset($_GET['action']) && $_GET['action'] == "modifier"){
+                $requete = ("SELECT * FROM abonne WHERE id_abonne = $_GET[id_abonne]");
+                $query = $bdd->prepare($requete);
+                $query->execute();
+                $abonne_choisi = $query->fetch();
+                $query->closeCursor();
+                echo'
+                <form method="post" action="" class="enregistrementAbonne">
+                    <label for="prenom">Prénom</label><br>
+                    <input type="text" id="prenom" name="prenom" value="'; if(isset($abonne_choisi['prenom'])){echo $abonne_choisi['prenom'];} echo'"><br><br>
+                    <input type="submit" value="Modifier">
+                </form>
+                ';
+            }
+            else{
+                if(isset($_POST['prenom']) && ($_POST['prenom']!="")){
+                    $requete = "INSERT INTO abonne (prenom) VALUES ('$_POST[prenom]')";
+                    $query = $bdd->prepare($requete);
+                    $query->execute();
+                    $query->closeCursor();
+                    echo'<p>L\'abonné '.$_POST['prenom'].' a bien été ajouté !</p>';
+                }
+                echo'
+                <form method="post" action="" class="enregistrementAbonne">
+                    <label for="prenom">Prénom</label><br>
+                    <input type="text" id="prenom" name="prenom"><br><br>
+                    <input type="submit" value="Ajouter">
+                </form>
+                ';
             }
             echo'
-            <form method="post" action="">
-                <label for="prenom">Prénom</label><br>
-                <input type="text" id="prenom" name="prenom"><br><br>
-                <input type="submit" value="Ajouter">
-            </form>
         </div>
         ';
     ?>
