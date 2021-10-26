@@ -58,8 +58,8 @@
                         <th>'.$livre['id_livre'].'</th>
                         <th>'.$livre['auteur'].'</th>
                         <th>'.$livre['titre'].'</th>
-                        <th>&#x1F58A;</th>
-                        <th>&#10060;</th>
+                        <th><a href="?action=modifier">&#x1F58A;</a></th>
+                        <th><a href="?action=supprimer">&#10060;</a></th>
                     <tr>
                     ';
                 };

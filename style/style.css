@@ -38,9 +38,13 @@ header .menuBar ul a{
 .content table thead{
     height: 4vh;
 }
-tr, th{
+.content table thead tr, .content table thead th,
+.content table tbody tr, .content table tbody th{
     border-top: 1px solid #000;
     text-align: center;
+}
+.content tbody th a{
+    text-decoration: none;
 }
 .content form{
     margin-top: 10px;
