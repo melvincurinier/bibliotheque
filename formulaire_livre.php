@@ -58,29 +58,62 @@
                         <th>'.$livre['id_livre'].'</th>
                         <th>'.$livre['auteur'].'</th>
                         <th>'.$livre['titre'].'</th>
-                        <th><a href="?action=modifier">&#x1F58A;</a></th>
-                        <th><a href="?action=supprimer">&#10060;</a></th>
+                        <th><a href="?action=modifier&id_livre='.$livre['id_livre'].'">&#x1F58A;</a></th>
+                        <th><a href="?action=supprimer&id_livre='.$livre['id_livre'].'">&#10060;</a></th>
                     <tr>
                     ';
                 };
                 echo '
                 </tbody>
             </table>';
-            if($_POST){
-                $requete = "INSERT INTO livre (auteur, titre) VALUES ('$_POST[auteur]', '$_POST[titre]')";
+            
+            if((isset($_GET['id_livre']))
+            AND isset($_POST['auteur']) && ($_POST['auteur']!="")
+            AND isset($_POST['titre']) && ($_POST['titre']!=""))
+            {
+                $requete = ("UPDATE livre set auteur = '$_POST[auteur]', titre = '$_POST[titre]' WHERE id_livre = $_GET[id_livre]");
                 $query = $bdd->prepare($requete);
                 $query->execute();
                 $query->closeCursor();
-                echo'<p>Le livre '.$_POST['titre'].' a bien été ajouté !</p>';
+                echo'<p>Le livre a bien été modifié !</p>';
             }
-            echo'
-            <form method="post" action="">
+
+            if(isset($_GET['action']) && $_GET['action'] == "modifier"){
+                $requete = ("SELECT * FROM livre WHERE id_livre = $_GET[id_livre]");
+                $query = $bdd->prepare($requete);
+                $query->execute();
+                $livre_choisi = $query->fetch();
+                $query->closeCursor();
+                echo'
+                <form method="post" action="" class="formulaire">
+                    <label for="auteur">Auteur</label><br>
+                    <input type="text" id="auteur" name="auteur" value="'; if(isset($livre_choisi['auteur'])){echo $livre_choisi['auteur'];} echo'"><br><br>
+                    <label for="titre">Titre</label><br>
+                    <input type="text" id="titre" name="titre" value="'; if(isset($livre_choisi['titre'])){echo $livre_choisi['titre'];} echo'"><br><br>
+                    <input type="submit" value="Modifier">
+                </form>
+                ';
+            }
+            else{
+                if((isset($_POST['auteur'])) && ($_POST['auteur']!="") 
+                AND isset($_POST['titre']) && ($_POST['titre']!="")){
+                    $requete = "INSERT INTO livre (auteur, titre) VALUES ('$_POST[auteur]', '$_POST[titre]')";
+                    $query = $bdd->prepare($requete);
+                    $query->execute();
+                    $query->closeCursor();
+                    echo'<p>Le livre a bien été ajouté !</p>';
+                }
+                echo'
+                <form method="post" action="" class="formulaire">
                 <label for="auteur">Auteur</label><br>
                 <input type="text" id="auteur" name="auteur"><br><br>
                 <label for="titre">Titre</label><br>
                 <input type="text" id="titre" name="titre"><br><br>
                 <input type="submit" value="Ajouter">
-            </form>
+                </form>
+                ';
+            }
+            echo'
         </div>
         ';
     ?>

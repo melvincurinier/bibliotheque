@@ -53,9 +53,9 @@ header .menuBar ul a{
 .content form input{
     padding: 3px;
 }
-.enregistrementAbonne #prenom, 
-.enregistrementAbonne #auteur, 
-.enregistrementAbonne #titre{
+.formulaire #prenom, 
+.formulaire #auteur,  /* à modifier */
+.formulaire #titre{
     width: 100%;
 }
 

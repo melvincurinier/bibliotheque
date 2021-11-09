@@ -71,9 +71,9 @@
                 $query = $bdd->prepare($requete);
                 $query->execute();
                 $query->closeCursor();
-                echo'<p>L\'abonné '.$_POST['prenom'].' a bien été modifié !</p>';
+                echo'<p>L\'abonné a bien été modifié !</p>';
             }
-            
+
             if(isset($_GET['action']) && $_GET['action'] == "modifier"){
                 $requete = ("SELECT * FROM abonne WHERE id_abonne = $_GET[id_abonne]");
                 $query = $bdd->prepare($requete);
@@ -81,7 +81,7 @@
                 $abonne_choisi = $query->fetch();
                 $query->closeCursor();
                 echo'
-                <form method="post" action="" class="enregistrementAbonne">
+                <form method="post" action="" class="formulaire">
                     <label for="prenom">Prénom</label><br>
                     <input type="text" id="prenom" name="prenom" value="'; if(isset($abonne_choisi['prenom'])){echo $abonne_choisi['prenom'];} echo'"><br><br>
                     <input type="submit" value="Modifier">
@@ -94,10 +94,10 @@
                     $query = $bdd->prepare($requete);
                     $query->execute();
                     $query->closeCursor();
-                    echo'<p>L\'abonné '.$_POST['prenom'].' a bien été ajouté !</p>';
+                    echo'<p>L\'abonné  a bien été ajouté !</p>';
                 }
                 echo'
-                <form method="post" action="" class="enregistrementAbonne">
+                <form method="post" action="" class="formulaire">
                     <label for="prenom">Prénom</label><br>
                     <input type="text" id="prenom" name="prenom"><br><br>
                     <input type="submit" value="Ajouter">

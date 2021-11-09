@@ -78,7 +78,7 @@
                 echo'<p>L\'emprunt a bien été ajouté !</p>';
             }
             echo'
-            <form method="post" action="">
+            <form method="post" action="" class="formulaire">
                 <label for="id_abonne">Abonné</label><br>
                 <select id="id_abonne" name="id_abonne">';
                     $query = $bdd->prepare('SELECT * FROM abonne'); // requête SQL
