@@ -49,6 +49,7 @@ header .menuBar ul a{
 }
 .content form{
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 .content form input{
     padding: 3px;

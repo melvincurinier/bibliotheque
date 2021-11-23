@@ -27,6 +27,7 @@
     $bdd = connectDb(); //connexion à la BDD
     $query = $bdd->prepare('SELECT * FROM abonne'); // requête SQL
     $query->execute(); // paramètres et exécution
+    $countAbonne = $query->rowCount();
     $result = $query->fetchAll();
     $query->closeCursor();
 
@@ -125,6 +126,7 @@
                 ';
     }
     echo '
+            <p>Il y a '.$countAbonne.' emprunt(s) dans la base de données</p>
         </div>
         ';
     ?>

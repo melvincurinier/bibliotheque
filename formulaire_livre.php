@@ -27,6 +27,7 @@
     $bdd = connectDb(); //connexion à la BDD
     $query = $bdd->prepare('SELECT * FROM livre'); // requête SQL
     $query->execute(); // paramètres et exécution
+    $countLivre = $query->rowCount();
 
     $result = $query->fetchAll();
     $query->closeCursor();
@@ -141,6 +142,7 @@
                 ';
     }
     echo '
+            <p>Il y a '.$countLivre.' livre(s) dans la base de données</p>
         </div>
         ';
     ?>
