@@ -115,7 +115,7 @@
             $query = $bdd->prepare($requete);
             $query->execute();
             $query->closeCursor();
-            echo '<p>L\'abonné  a bien été ajouté !</p>';
+            header("Refresh:0");
         }
         echo '
                 <form method="post" action="" class="formulaire">
@@ -126,7 +126,7 @@
                 ';
     }
     echo '
-            <p>Il y a '.$countAbonne.' emprunt(s) dans la base de données</p>
+            <p>Il y a ' . $countAbonne . ' abonné(s) dans la base de données</p>
         </div>
         ';
     ?>

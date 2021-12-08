@@ -219,60 +219,60 @@
     }
     echo '
             <div>
-                <p>Il y a '.$countEmprunt.' emprunt(s) dans la base de données</p>
-            </div>
+                <p>Il y a ' . $countEmprunt . ' emprunt(s) dans la base de données</p>
+            </div><br>
             <div>
                 ';
-                $query = $bdd->prepare('SELECT e.id_livre, l.titre FROM emprunt e, livre l where e.id_livre = l.id_livre and e.date_rendu IS NULL');
-                $query->execute();
-                $result = $query->fetchAll();
-                foreach($result as $livreNonRendu){
-                    echo 'Le livre n°'.$livreNonRendu['id_livre'].' '.$livreNonRendu['titre'].' n\'a pas été rendu à la bibliothèque<br>';
-                }
-        echo'
-            </div>
+    $query = $bdd->prepare('SELECT e.id_livre, l.titre FROM emprunt e, livre l where e.id_livre = l.id_livre and e.date_rendu IS NULL');
+    $query->execute();
+    $result = $query->fetchAll();
+    foreach ($result as $livreNonRendu) {
+        echo 'Le livre n°' . $livreNonRendu['id_livre'] . ' ' . $livreNonRendu['titre'] . ' n\'a pas été rendu à la bibliothèque<br>';
+    }
+    echo '
+            </div><br>
             <div>
             ';
-            $query = $bdd->prepare('SELECT e.id_livre from abonne a, emprunt e where e.id_abonne = a.id_abonne and a.prenom = "Chloé"');
-            $query->execute();
-            $result = $query->fetchAll();
-            foreach($result as $empruntDeChloe){
-                echo 'Le livre n°'.$empruntDeChloe['id_livre'].' est emprunté par Chloé<br>';
-            }
-            echo'
-            </div>
+    $query = $bdd->prepare('SELECT e.id_livre from abonne a, emprunt e where e.id_abonne = a.id_abonne and a.prenom = "Chloé"');
+    $query->execute();
+    $result = $query->fetchAll();
+    foreach ($result as $empruntDeChloe) {
+        echo 'Le livre n°' . $empruntDeChloe['id_livre'] . ' est emprunté par Chloé<br>';
+    }
+    echo '
+            </div><br>
             <div>
             ';
-            $query = $bdd->prepare('SELECT * from emprunt e, abonne a, livre l where e.id_livre = l.id_livre and e.id_abonne = a.id_abonne and l.auteur = "ALPHONSE DAUDET"');
-            $query->execute();
-            $result = $query->fetchAll();
-            foreach($result as $empruntLivreAlphonseDaudet){
-                echo 'L\'abonné n°'.$empruntLivreAlphonseDaudet['id_abonne'].' a déjà emprunté un livre d\'Alphonse DAUDET<br>';
-            }
-            echo'
-            </div>
+    $query = $bdd->prepare('SELECT * from emprunt e, abonne a, livre l where e.id_livre = l.id_livre and e.id_abonne = a.id_abonne and l.auteur = "ALPHONSE DAUDET"');
+    $query->execute();
+    $result = $query->fetchAll();
+    foreach ($result as $empruntLivreAlphonseDaudet) {
+        echo 'L\'abonné n°' . $empruntLivreAlphonseDaudet['id_abonne'] . ' a déjà emprunté un livre d\'Alphonse DAUDET<br>';
+    }
+    echo '
+            </div><br>
             <div>
             ';
-            $query = $bdd->prepare('SELECT * from emprunt e, abonne a, livre l where e.id_livre = l.id_livre and e.id_abonne = a.id_abonne and a.prenom ="Chloé" and e.date_rendu IS NULL');
-            $query->execute();
-            $result = $query->fetchAll();
-            foreach($result as $empruntNonRenduDeChloe){
-                echo 'Cholé n\'a pas encore rendu le livre n°'.$empruntNonRenduDeChloe['id_livre'].' '.$empruntNonRenduDeChloe['titre'].'<br>';
-            }
-            echo'
-            </div>
+    $query = $bdd->prepare('SELECT * from emprunt e, abonne a, livre l where e.id_livre = l.id_livre and e.id_abonne = a.id_abonne and a.prenom ="Chloé" and e.date_rendu IS NULL');
+    $query->execute();
+    $result = $query->fetchAll();
+    foreach ($result as $empruntNonRenduDeChloe) {
+        echo 'Cholé n\'a pas encore rendu le livre n°' . $empruntNonRenduDeChloe['id_livre'] . ' ' . $empruntNonRenduDeChloe['titre'] . '<br>';
+    }
+    echo '
+            </div><br>
             <div>
             ';
-            $query = $bdd->prepare('SELECT * from emprunt e, abonne a, livre l where e.id_livre = l.id_livre and e.id_abonne = a.id_abonne and a.prenom ="Chloé" and e.date_rendu IS NULL');
-            $query->execute();
-            $result = $query->fetchAll();
-            foreach($result as $empruntNonRenduDeChloe){
-                echo 'Cholé n\'a pas encore rendu le livre n°'.$empruntNonRenduDeChloe['id_livre'].' '.$empruntNonRenduDeChloe['titre'].'<br>';
-            }
-            echo'
-            </div>
-        </div>
-        ';
+    $query = $bdd->prepare('SELECT * from emprunt e, abonne a, livre l where e.id_livre = l.id_livre and e.id_abonne = a.id_abonne and a.prenom ="Chloé" and e.date_rendu IS NULL');
+    $query->execute();
+    $result = $query->fetchAll();
+    foreach ($result as $empruntNonRenduDeChloe) {
+        echo 'Cholé n\'a pas encore rendu le livre n°' . $empruntNonRenduDeChloe['id_livre'] . ' ' . $empruntNonRenduDeChloe['titre'] . '<br>';
+    }
+    echo '
+            </div><br>
+            <div>
+            ';
     ?>
 </body>
 

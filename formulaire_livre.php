@@ -142,7 +142,7 @@
                 ';
     }
     echo '
-            <p>Il y a '.$countLivre.' livre(s) dans la base de données</p>
+            <p>Il y a ' . $countLivre . ' livre(s) dans la base de données</p>
         </div>
         ';
     ?>
